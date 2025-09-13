@@ -19,15 +19,12 @@ export default function App() {
 
   function validarLogin() {
     const ok = usuariosValidos.some(
-      (u) => u.email === email.trim() && u.senha === senha
+      (u) =>
+        u.email.toLowerCase() === email.trim().toLowerCase() &&
+        u.senha === senha
     )
-
-    if (ok) {
-      setMensagem('Acessado com sucesso!')
-    } else {
-      setMensagem('Usuário ou senha incorretos!')
-    }
-  }
+    setMensagem(ok ? 'Acessado com sucesso!' : 'Usuário ou senha incorretos!')
+  }  
 
   return (
     <div className="page">
