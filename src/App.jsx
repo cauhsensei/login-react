@@ -7,6 +7,10 @@ export default function App() {
 
   const [mensagem, setMensagem] = useState('')
 
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') validarLogin()
+  }
+
   const usuariosValidos = [
     { email: 'eduardo.lino@pucpr.br', senha: '123456' },
     { email: 'cauane.cardoso@pucpr.br', senha: '654321' },
@@ -31,17 +35,20 @@ export default function App() {
 
       <input
         type="email"
+        autoFocus
         placeholder="eduardo.lino@pucpr.br"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => { setEmail(e.target.value); setMensagem('') }}
+        onKeyDown={handleKeyDown}
         className="input"
       />
-
+      
       <input
         type="password"
         placeholder="••••••"
         value={senha}
-        onChange={(e) => setSenha(e.target.value)}
+        onChange={(e) => { setSenha(e.target.value); setMensagem('') }}
+        onKeyDown={handleKeyDown}
         className="input"
       />
 
