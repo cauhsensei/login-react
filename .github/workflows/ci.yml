@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Lint
+        run: |
+          if npm run | grep -q "lint"; then
+            npm run lint
+          else
+            echo "No lint script. Skipping."
+          fi
+
+      - name: Test
+        run: |
+          if npm run | grep -q "test"; then
+            npm test -- --ci --reporters=default --reporters=jest-junit
+          else
+            echo "No test script. Skipping."
+          fi
+
+      - name: Build
+        run: |
+          if npm run | grep -q "build"; then
+            npm run build
+          else
+            echo "No build script. Skipping."
+          fi
+
+      - name: Upload build artifact (opcional)
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-or-build
+          path: |
+            dist
+            build
+          if-no-files-found: ignore
