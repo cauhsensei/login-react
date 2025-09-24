@@ -1,30 +1,19 @@
 import { useState } from 'react'
+import { validarLogin } from './auth'
 
 export default function App() {
-
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
-
   const [mensagem, setMensagem] = useState('')
 
-  function handleKeyDown(e) {
-    if (e.key === 'Enter') validarLogin()
+  function tentarLogin() {
+    const ok = validarLogin(email, senha)
+    setMensagem(ok ? 'Acessado com sucesso!' : 'Usuário ou senha incorretos!')
   }
 
-  const usuariosValidos = [
-    { email: 'eduardo.lino@pucpr.br', senha: '123456' },
-    { email: 'cauane.cardoso@pucpr.br', senha: '654321' },
-    { email: 'maria.eduarda@pucpr.br', senha: '789012' },
-  ]
-
-  function validarLogin() {
-    const ok = usuariosValidos.some(
-      (u) =>
-        u.email.toLowerCase() === email.trim().toLowerCase() &&
-        u.senha === senha
-    )
-    setMensagem(ok ? 'Acessado com sucesso!' : 'Usuário ou senha incorretos!')
-  }  
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') tentarLogin()
+  }
 
   return (
     <div className="page">
@@ -39,7 +28,7 @@ export default function App() {
         onKeyDown={handleKeyDown}
         className="input"
       />
-      
+
       <input
         type="password"
         placeholder="••••••"
@@ -49,10 +38,7 @@ export default function App() {
         className="input"
       />
 
-      <button onClick={validarLogin} className="btn">
-        Acessar
-      </button>
-
+      <button onClick={tentarLogin} className="btn">Acessar</button>
       <p className="label">{mensagem}</p>
     </div>
   )
