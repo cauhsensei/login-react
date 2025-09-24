@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="7" failures="0" errors="0" time="1.0273807">
+    <testsuite name="src/__tests__/App.test.jsx" timestamp="2025-09-24T14:15:23.617Z" hostname="CAUANE-PC" tests="2" failures="0" errors="0" skipped="0" time="1.0249141">
+        <testcase classname="src/__tests__/App.test.jsx" name="exibe sucesso após login válido (clique)" time="0.6794841">
+        </testcase>
+        <testcase classname="src/__tests__/App.test.jsx" name="Enter dispara validação e mostra erro com credenciais inválidas" time="0.3443384">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/__tests__/auth.test.js" timestamp="2025-09-24T14:15:23.623Z" hostname="CAUANE-PC" tests="5" failures="0" errors="0" skipped="0" time="0.0024666">
+        <testcase classname="src/__tests__/auth.test.js" name="auth utils &gt; normalizeEmail: trim + lowercase" time="0.0009605">
+        </testcase>
+        <testcase classname="src/__tests__/auth.test.js" name="auth utils &gt; isValidEmail: aceita formato válido" time="0.0001663">
+        </testcase>
+        <testcase classname="src/__tests__/auth.test.js" name="auth utils &gt; validarLogin: verdadeiro para credenciais corretas" time="0.0001227">
+        </testcase>
+        <testcase classname="src/__tests__/auth.test.js" name="auth utils &gt; validarLogin: falso para senha errada" time="0.0001529">
+        </testcase>
+        <testcase classname="src/__tests__/auth.test.js" name="auth utils &gt; validarLogin: ignora espaços e case no e-mail" time="0.00015">
+        </testcase>
+    </testsuite>
+</testsuites>
